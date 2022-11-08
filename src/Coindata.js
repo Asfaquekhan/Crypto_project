@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import {FcInfo} from 'react-icons/fc'
 import {
   TableContainer,
   Table,
@@ -13,6 +14,7 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
+
 
 export default function Coindata() {
   const [userdata, setuserdata] = useState();
@@ -44,11 +46,29 @@ export default function Coindata() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
+  }
+ /* Adding to watch */ 
+ const [add,setadd]=useState()
+ const deleteoption=(id)=>{
+  let news = userdata.map((value)=>{return value.id}).indexOf(id)
+  let product = userdata.splice(news,1)
 
+  setadd(product[0].id)
+
+
+  
+ }
   return (
     <div className="max-w-[800px] mx-auto">
-     
+     <div class={add && "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"} role="alert">
+  <div class="flex">
+    <div className="mr-3">{add && <FcInfo size={30}/>}</div>
+    <div>
+      <p class="font-bold">{add}</p>
+      <p class="text-sm">{add && "Removed from your watch list"}</p>
+    </div>
+  </div>
+</div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -57,6 +77,7 @@ export default function Coindata() {
               <TableCell className="text-lg">Coin</TableCell>
               <TableCell className="text-lg">Price</TableCell>
               <TableCell className="text-lg">Up/Down</TableCell>
+              <TableCell className="text-lg">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -91,7 +112,7 @@ export default function Coindata() {
                               : "flex items-center text-green-600"
                           }
                         >
-                          <span>{row.price_change_percentage_24h}</span>
+                          <span>{row.price_change_percentage_24h}%</span>
                           <span>
                             {row.price_change_percentage_24h < 0 ? (
                               <AiOutlineArrowDown />
@@ -101,6 +122,9 @@ export default function Coindata() {
                           </span>
                         </div>
                       </TableCell>
+                      <TableCell>
+                       <button onClick={(()=>{deleteoption(row.id)})}>Delete</button>
+                        </TableCell>
                     </TableRow>
                   );
                 })}
