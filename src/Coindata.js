@@ -59,7 +59,7 @@ export default function Coindata() {
   
  }
   return (
-    <div className="max-w-[800px] mx-auto">
+    <div className="max-w-[800px] mx-auto shadow-xl">
      <div class={add && "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"} role="alert">
   <div class="flex">
     <div className="mr-3">{add && <FcInfo size={30}/>}</div>
@@ -73,7 +73,7 @@ export default function Coindata() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className="text-lg">Rank</TableCell>
+              
               <TableCell className="text-lg">Coin</TableCell>
               <TableCell className="text-lg">Price</TableCell>
               <TableCell className="text-lg">Up/Down</TableCell>
@@ -87,7 +87,7 @@ export default function Coindata() {
                 .map((row) => {
                   return (
                     <TableRow key={row.id}>
-                      <TableCell>{row.market_cap_rank}</TableCell>
+                      
                       <TableCell>
                         <div className="flex items-center">
                           <span className="mr-2">
@@ -123,7 +123,7 @@ export default function Coindata() {
                         </div>
                       </TableCell>
                       <TableCell>
-                       <button onClick={(()=>{deleteoption(row.id)})}>Delete</button>
+                       <button onClick={(()=>{deleteoption(row.id)})} className='ring-1 p-1 rounded-lg text-white bg-blue-700'>Delete</button>
                         </TableCell>
                     </TableRow>
                   );

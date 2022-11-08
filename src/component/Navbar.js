@@ -11,7 +11,7 @@ export default function Navbar() {
             <li className='p-2 m-2'>Current trends</li>
                 <li className='p-2 m-2'>Crypto-News</li>
                 <li className='p-2 m-2'>About Us</li>
-               
+             
             </ul>
         </div>
     </div>
