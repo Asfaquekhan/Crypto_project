@@ -1,6 +1,7 @@
 
 import './App.css';
 import Coindata from './Coindata';
+import CurrencyExchange from './component/CurrencyExchange';
 
 
 import Home from './component/Home';
@@ -16,6 +17,7 @@ function App() {
      <Home/>
     
       <Coindata/>
+      <CurrencyExchange/>
     </div>
   );
 }

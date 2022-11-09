@@ -58,14 +58,32 @@ export default function Coindata() {
 
   
  }
+ const [watch,setwatch]=useState([])
+ const addition=(name)=>{
+ 
+    setwatch((value)=>{
+      return [...value, name];
+    })
+   console.log(watch)
+ }
   return (
     <div className="max-w-[800px] mx-auto shadow-xl">
-     <div class={add && "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"} role="alert">
-  <div class="flex">
+      <div>
+        <ul>
+          {watch.map((value)=>{
+            return (
+              <li>{value}</li>
+            )
+          })}
+        </ul>
+      </div>
+      
+     <div className={add && "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"} role="alert">
+  <div className="flex">
     <div className="mr-3">{add && <FcInfo size={30}/>}</div>
     <div>
-      <p class="font-bold">{add}</p>
-      <p class="text-sm">{add && "Removed from your watch list"}</p>
+      <p className="font-bold">{add}</p>
+      <p className="text-sm">{add && "Removed from your watch list"}</p>
     </div>
   </div>
 </div>
@@ -124,6 +142,7 @@ export default function Coindata() {
                       </TableCell>
                       <TableCell>
                        <button onClick={(()=>{deleteoption(row.id)})} className='ring-1 p-1 rounded-lg text-white bg-blue-700'>Delete</button>
+                       <button className="ring-1 p-1 rounded-lg ml-3 text-white bg-blue-700" onClick={(()=>{addition(row.name )})}>Add</button>
                         </TableCell>
                     </TableRow>
                   );
