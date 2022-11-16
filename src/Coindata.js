@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { AiOutlineArrowUp, AiOutlineArrowDown,AiOutlineDelete } from "react-icons/ai";
 import {FcInfo} from 'react-icons/fc'
 import {
   TableContainer,
@@ -61,18 +61,30 @@ export default function Coindata() {
  const [watch,setwatch]=useState([])
  const addition=(name)=>{
  
-    setwatch((value)=>{
-      return [...value, name];
-    })
+   setwatch((value)=>{
+    if(value.includes(name)){
+      return[...value]
+    }
+    else{
+      return[...value,name]
+    }
+   })
+   
    console.log(watch)
  }
   return (
     <div className="max-w-[800px] mx-auto shadow-xl">
       <div>
-        <ul>
+        <h1 className="text-center text-xl p-2 m-2">Watch list</h1>
+        <p className="text-center p-2 m-2">You have {watch.length} coins in your watch list</p>
+        <ul className="list-disc p-2 m-2">
           {watch.map((value)=>{
             return (
-              <li>{value}</li>
+              <div>
+                <li className="flex items-center">{value}</li> 
+                <button className="flex items-center ring-1 p-1 rounded-lg text-white bg-blue-700">Delete <AiOutlineDelete className=""/></button>
+              </div>
+              
             )
           })}
         </ul>

@@ -10,7 +10,7 @@ const [currency,setcurrency]=useState()
         .then((value)=>{setcurrency(value.data)})
         .catch((error)=>{return console.log(error)})
     },[])
-    console.log(currency)
+   
   return (
     <div>
       

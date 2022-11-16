@@ -6,6 +6,7 @@ import CurrencyExchange from './component/CurrencyExchange';
 
 import Home from './component/Home';
 import Navbar from './component/Navbar';
+import News from './component/News';
 
 
 
@@ -18,6 +19,7 @@ function App() {
     
       <Coindata/>
       <CurrencyExchange/>
+      <News/>
     </div>
   );
 }
