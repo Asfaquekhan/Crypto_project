@@ -2,8 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { AiOutlineArrowUp, AiOutlineArrowDown,AiOutlineDelete } from "react-icons/ai";
-import {FcInfo} from 'react-icons/fc'
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { FcInfo } from "react-icons/fc";
 import {
   TableContainer,
   Table,
@@ -15,20 +15,17 @@ import {
   TablePagination,
 } from "@mui/material";
 
-
 export default function Coindata() {
   const [userdata, setuserdata] = useState();
   const [page, setPage] = useState(0);
   const [RowsPerPage, setRowsPerPage] = useState(10);
- 
+
   /* to Exchange currency */
 
   /* Currency Data */
- 
 
   useEffect(() => {
-    const url =
-    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
     axios
       .get(url)
       .then((res) => {
@@ -46,64 +43,70 @@ export default function Coindata() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  }
- /* Adding to watch */ 
- const [add,setadd]=useState()
- const deleteoption=(id)=>{
-  let news = userdata.map((value)=>{return value.id}).indexOf(id)
-  let product = userdata.splice(news,1)
+  };
+  /* Adding to watch */
+  const [add, setadd] = useState();
+  const deleteoption = (id) => {
+    let news = userdata
+      .map((value) => {
+        return value.id;
+      })
+      .indexOf(id);
+    let product = userdata.splice(news, 1);
 
-  setadd(product[0].id)
-
-
-  
- }
- const [watch,setwatch]=useState([])
- const addition=(name)=>{
+    setadd(product[0].id);
+  };
  
-   setwatch((value)=>{
-    if(value.includes(name)){
-      return[...value]
-    }
-    else{
-      return[...value,name]
-    }
-   })
-   
-   console.log(watch)
- }
+  const [watch, setwatch] = useState([]);
+  const addition = (name) => {
+    setwatch((value) => {
+      if (value.includes(name)) {
+        alert(`${name} is already in your watchlist`)
+        return [...value] 
+      } else {
+        return [...value, name];
+      }
+    });
+  };
+
   return (
     <div className="max-w-[800px] mx-auto shadow-xl">
       <div>
         <h1 className="text-center text-xl p-2 m-2">Watch list</h1>
-        <p className="text-center p-2 m-2">You have {watch.length} coins in your watch list</p>
+        <p className="text-center p-2 m-2">
+          You have {watch.length} coins in your watch list
+        </p>
+        
         <ul className="list-disc p-2 m-2">
-          {watch.map((value)=>{
+          {watch.map((value) => {
             return (
-              <div>
-                <li className="flex items-center">{value}</li> 
-                <button className="flex items-center ring-1 p-1 rounded-lg text-white bg-blue-700">Delete <AiOutlineDelete className=""/></button>
+              <div className="flex justify-between">
+                <li className="flex items-center">{value}</li>
               </div>
-              
-            )
+            );
           })}
         </ul>
       </div>
-      
-     <div className={add && "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"} role="alert">
-  <div className="flex">
-    <div className="mr-3">{add && <FcInfo size={30}/>}</div>
-    <div>
-      <p className="font-bold">{add}</p>
-      <p className="text-sm">{add && "Removed from your watch list"}</p>
-    </div>
-  </div>
-</div>
+
+      <div
+        className={
+          add &&
+          "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+        }
+        role="alert"
+      >
+        <div className="flex">
+          <div className="mr-3">{add && <FcInfo size={30} />}</div>
+          <div>
+            <p className="font-bold">{add}</p>
+            <p className="text-sm">{add && "Removed from your watch list"}</p>
+          </div>
+        </div>
+      </div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              
               <TableCell className="text-lg">Coin</TableCell>
               <TableCell className="text-lg">Price</TableCell>
               <TableCell className="text-lg">Up/Down</TableCell>
@@ -117,7 +120,6 @@ export default function Coindata() {
                 .map((row) => {
                   return (
                     <TableRow key={row.id}>
-                      
                       <TableCell>
                         <div className="flex items-center">
                           <span className="mr-2">
@@ -153,9 +155,23 @@ export default function Coindata() {
                         </div>
                       </TableCell>
                       <TableCell>
-                       <button onClick={(()=>{deleteoption(row.id)})} className='ring-1 p-1 rounded-lg text-white bg-blue-700'>Delete</button>
-                       <button className="ring-1 p-1 rounded-lg ml-3 text-white bg-blue-700" onClick={(()=>{addition(row.name )})}>Add</button>
-                        </TableCell>
+                        <button
+                          onClick={() => {
+                            deleteoption(row.id);
+                          }}
+                          className="ring-1 p-1 rounded-lg text-white bg-blue-700"
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="ring-1 p-1 rounded-lg ml-3 text-white bg-blue-700"
+                          onClick={() => {
+                            addition(row.name);
+                          }}
+                        >
+                          Add
+                        </button>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
