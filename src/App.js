@@ -1,12 +1,14 @@
 
 import './App.css';
-import Coindata from './Coindata';
-import CurrencyExchange from './component/CurrencyExchange';
+import Coindata from './Coins/Coindata';
+import Coinpage from './Coins/Coinpage';
+
+import CurrencyExchange from './Coins/CurrencyExchange';
 
 
 import Home from './component/Home';
 import Navbar from './component/Navbar';
-import News from './component/News';
+
 
 
 
@@ -17,9 +19,9 @@ function App() {
      <Navbar/>
      <Home/>
     
-      <Coindata/>
+     <Coindata/>
       <CurrencyExchange/>
-      <News/>
+     <Coinpage/>
     </div>
   );
 }

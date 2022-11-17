@@ -61,7 +61,7 @@ export default function Coindata() {
   const addition = (name) => {
     setwatch((value) => {
       if (value.includes(name)) {
-        alert(`${name} is already in your watchlist`)
+        alert(`${name.name} is already in your watchlist`)
         return [...value] 
       } else {
         return [...value, name];
@@ -77,15 +77,15 @@ export default function Coindata() {
           You have {watch.length} coins in your watch list
         </p>
         
-        <ul className="list-disc p-2 m-2">
-          {watch.map((value) => {
+        <div className="list-disc p-2 m-2">
+          {watch.map((value,pos) => {
             return (
-              <div className="flex justify-between">
-                <li className="flex items-center">{value}</li>
+              <div className="flex justify-between" key={pos}>
+                <p className="flex items-center">{value.name}</p>
               </div>
             );
           })}
-        </ul>
+        </div>
       </div>
 
       <div
@@ -166,7 +166,7 @@ export default function Coindata() {
                         <button
                           className="ring-1 p-1 rounded-lg ml-3 text-white bg-blue-700"
                           onClick={() => {
-                            addition(row.name);
+                            addition(row);
                           }}
                         >
                           Add
