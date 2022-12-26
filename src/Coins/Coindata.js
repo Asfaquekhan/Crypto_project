@@ -47,10 +47,22 @@ export default function Coindata() {
   };
   /* Adding to watch */
  
-
+  const [ isAlertVisible, setIsAlertVisible ] = useState(false);
+  const [add,setadd]=useState()
+  const handleButtonClick = (item) => {
+      setIsAlertVisible(true);
+       setadd(item)
+        setTimeout(() => {
+            setIsAlertVisible(false);
+       }, 2000);
+  }
   return (
     <div className="max-w-[800px] mx-auto shadow-xl">
-     
+     <div className={isAlertVisible?`fixed top-[20%] right-[40%] bg-green-300 p-2 border rounded-sm`:'hidden'}>
+      
+   <span className="font-semibold mr-3">{add}</span>
+   added to your watchlist
+     </div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -111,7 +123,8 @@ export default function Coindata() {
                         <button
                           className="ring-1 p-1 rounded-lg ml-3 text-white bg-blue-700"
                           onClick={() => {
-                            coinadd(row);
+                            coinadd(row)
+                            handleButtonClick (row.name)
                           }}
                         >
                           Add
