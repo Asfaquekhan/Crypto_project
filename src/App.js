@@ -1,27 +1,27 @@
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 
-import './App.css';
-import Coindata from './Coins/Coindata';
-import Coinpage from './Coins/Coinpage';
+import Coinpage from "./Coins/Coinpage";
 
-import CurrencyExchange from './Coins/CurrencyExchange';
-
-
-import Home from './component/Home';
-import Navbar from './component/Navbar';
-
-
-
-
+import Home from "./component/Home";
+import Navbar from "./component/Navbar";
+import Watchlist from "./component/Watchlist";
+import { Context } from "./Contex/Context";
 
 function App() {
   return (
-    <div >
-     <Navbar/>
-     <Home/>
-    
-     <Coindata/>
-      <CurrencyExchange/>
-     <Coinpage/>
+    <div>
+      <Context>
+        <Navbar />
+        <Watchlist />
+        <Routes>
+          <Route>
+            <Route path="/" element={<Home />} />
+
+            <Route path="/coins/:id" element={<Coinpage />} />
+          </Route>
+        </Routes>
+      </Context>
     </div>
   );
 }

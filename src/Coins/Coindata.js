@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
-import { FcInfo } from "react-icons/fc";
+
 import {
   TableContainer,
   Table,
@@ -14,12 +14,13 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
+import { Uselogics } from "../Contex/Context";
 
 export default function Coindata() {
   const [userdata, setuserdata] = useState();
   const [page, setPage] = useState(0);
   const [RowsPerPage, setRowsPerPage] = useState(10);
-
+  const { setcoinname, coinadd } = Uselogics();
   /* to Exchange currency */
 
   /* Currency Data */
@@ -45,64 +46,11 @@ export default function Coindata() {
     setPage(0);
   };
   /* Adding to watch */
-  const [add, setadd] = useState();
-  const deleteoption = (id) => {
-    let news = userdata
-      .map((value) => {
-        return value.id;
-      })
-      .indexOf(id);
-    let product = userdata.splice(news, 1);
-
-    setadd(product[0].id);
-  };
  
-  const [watch, setwatch] = useState([]);
-  const addition = (name) => {
-    setwatch((value) => {
-      if (value.includes(name)) {
-        alert(`${name.name} is already in your watchlist`)
-        return [...value] 
-      } else {
-        return [...value, name];
-      }
-    });
-  };
 
   return (
     <div className="max-w-[800px] mx-auto shadow-xl">
-      <div>
-        <h1 className="text-center text-xl p-2 m-2">Watch list</h1>
-        <p className="text-center p-2 m-2">
-          You have {watch.length} coins in your watch list
-        </p>
-        
-        <div className="list-disc p-2 m-2">
-          {watch.map((value,pos) => {
-            return (
-              <div className="flex justify-between" key={pos}>
-                <p className="flex items-center">{value.name}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div
-        className={
-          add &&
-          "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
-        }
-        role="alert"
-      >
-        <div className="flex">
-          <div className="mr-3">{add && <FcInfo size={30} />}</div>
-          <div>
-            <p className="font-bold">{add}</p>
-            <p className="text-sm">{add && "Removed from your watch list"}</p>
-          </div>
-        </div>
-      </div>
+     
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -119,9 +67,14 @@ export default function Coindata() {
                 .slice(page * RowsPerPage, page * RowsPerPage + RowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow key={row.id}>
+                    <TableRow
+                      key={row.id}
+                      onClick={() => {
+                        setcoinname(row.id);
+                      }}
+                    >
                       <TableCell>
-                        <div className="flex items-center">
+                        <div className="flex items-center cursor-pointer">
                           <span className="mr-2">
                             {" "}
                             <img src={row.image} alt="" width={30} />
@@ -156,17 +109,9 @@ export default function Coindata() {
                       </TableCell>
                       <TableCell>
                         <button
-                          onClick={() => {
-                            deleteoption(row.id);
-                          }}
-                          className="ring-1 p-1 rounded-lg text-white bg-blue-700"
-                        >
-                          Delete
-                        </button>
-                        <button
                           className="ring-1 p-1 rounded-lg ml-3 text-white bg-blue-700"
                           onClick={() => {
-                            addition(row);
+                            coinadd(row);
                           }}
                         >
                           Add
