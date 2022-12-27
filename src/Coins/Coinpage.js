@@ -51,10 +51,17 @@ export default function Coinpage() {
     }
   return (
     <div className='w-10/12 mx-auto'>
-      <div className='flex items-center'>
-      <img src={coinname.image} alt="" width={40}/>
+      <div className='flex items-center justify-between'>
+        <div>
+        <img src={coinname.image} alt="" width={40}/>
       <h1 className='font-semibold text-3xl '>{coinname.name}</h1>
+        </div>
       
+      <form action="" method="get" className='text-center'>
+      
+      <input type="number" name="" id="" className='border-black border rounded-md mr-3' onChange={(e)=>{setdays(e.target.value)}}/>
+      <label htmlFor="" className="border rounded-md py-1 px-3 bg-black text-white">Days</label>
+    </form>
       </div>
       <Line
       data={data}
@@ -63,10 +70,12 @@ export default function Coinpage() {
       }}
     />
     <div className='flex justify-around'>
-      <button onClick={()=>{setdays(7)}}>Week</button>
-      <button onClick={()=>{setdays(30)}}>Month</button>
-      <button onClick={()=>{setdays(365)}}>Year</button>
+      <button onClick={()=>{setdays(7)}} className="border rounded-md py-1 px-3 bg-black text-white"> Week</button>
+      <button onClick={()=>{setdays(30)}}  className="border rounded-md py-1 px-3 bg-black text-white">Month</button>
+      <button onClick={()=>{setdays(365)}}  className="border rounded-md py-1 px-3 bg-black text-white">Year</button>
     </div>
+   
+    <p className='md:hidden text-center'>Please use landscape for better view</p>
     </div>
   )
 }
