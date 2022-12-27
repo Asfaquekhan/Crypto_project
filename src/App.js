@@ -10,7 +10,7 @@ import { Context } from "./Contex/Context";
 
 function App() {
   return (
-    <div>
+    <div className="">
       <Context>
         <Navbar />
         <Watchlist />

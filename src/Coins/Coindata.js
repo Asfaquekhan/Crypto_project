@@ -57,7 +57,7 @@ export default function Coindata() {
       setIsAlertVisible(false);
     }, 2000);
   };
-  console.log(userdata);
+  
   return (
     <div className="max-w-[800px] mx-auto shadow-xl">
       <p>

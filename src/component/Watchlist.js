@@ -9,7 +9,7 @@ export default function Watchlist() {
     <div
       className={
         watchlist
-          ? "fixed h-full md:w-1/4 md:right-0  w-1/2 top-14 bg-neutral-300  ease-in-out duration-500 bg-transparent"
+          ? "fixed h-full md:w-1/4 md:right-0  w-1/2 top-14 bg-neutral-600 text-white border border-black ease-in-out duration-500 bg-transparent cursor-pointer"
           : "fixed  top-0 w-[10%] h-1/5 text-white bg-slate-900 ease-in-out duration-500 right-[-100%]"
       }
     >

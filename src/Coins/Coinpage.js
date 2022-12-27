@@ -18,12 +18,12 @@ import { Uselogics } from '../Contex/Context'
 export default function Coinpage() {
   const [days,setdays]=useState()
     const {coinname}=Uselogics()
-   console.log(coinname)
+ 
     const [coin,setcoin]=useState()
     useEffect(()=>{
-        axios.get(`https://api.coingecko.com/api/v3/coins/${coinname.id}/market_chart?vs_currency=inr&days=7&interval=24`).then((value)=>{setcoin(value.data.prices)}).catch((error)=>{return console.log(error)})
-    },[coinname])
-    console.log(coin)
+        axios.get(`https://api.coingecko.com/api/v3/coins/${coinname.id}/market_chart?vs_currency=inr&days=${days?days:7}&interval=72`).then((value)=>{setcoin(value.data.prices)}).catch((error)=>{return console.log(error)})
+    },[coinname,days])
+   
     
     
     ChartJS.register(
@@ -35,7 +35,11 @@ export default function Coinpage() {
     )
   
     const data = {
-      labels:coin?.map((curr)=>{return curr[0]}),
+      labels:coin?.map((curr)=>{
+        let date =new Date(curr[0])
+       let time = date.getHours()>12 ? `${date.getHours()-12}:${date.getMinutes}PM`:`${date.getHours()}:${date.getMinutes()}AM`
+        return days===1?time:date.toLocaleDateString()
+      }),
       datasets: [
         {
           label: `${coinname.name}`,
@@ -58,6 +62,11 @@ export default function Coinpage() {
         responsive: true
       }}
     />
+    <div className='flex justify-around'>
+      <button onClick={()=>{setdays(7)}}>Week</button>
+      <button onClick={()=>{setdays(30)}}>Month</button>
+      <button onClick={()=>{setdays(365)}}>Year</button>
+    </div>
     </div>
   )
 }
