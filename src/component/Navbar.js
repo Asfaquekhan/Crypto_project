@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Uselogics } from "../Contex/Context";
 
 export default function Navbar() {
@@ -6,7 +7,9 @@ export default function Navbar() {
   return (
     <div className="flex justify-between sticky top-0 bg-slate-300 font-bold">
       <div>
+        <Link to='/'>
         <h1 className="p-2 m-2">CryptoBook</h1>
+        </Link>
       </div>
       <div>
         <ul className="flex">

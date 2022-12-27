@@ -15,6 +15,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import { Uselogics } from "../Contex/Context";
+import { Link } from "react-router-dom";
 
 export default function Coindata() {
   const [userdata, setuserdata] = useState();
@@ -46,23 +47,44 @@ export default function Coindata() {
     setPage(0);
   };
   /* Adding to watch */
- 
-  const [ isAlertVisible, setIsAlertVisible ] = useState(false);
-  const [add,setadd]=useState()
+
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [add, setadd] = useState();
   const handleButtonClick = (item) => {
-      setIsAlertVisible(true);
-       setadd(item)
-        setTimeout(() => {
-            setIsAlertVisible(false);
-       }, 2000);
-  }
+    setIsAlertVisible(true);
+    setadd(item);
+    setTimeout(() => {
+      setIsAlertVisible(false);
+    }, 2000);
+  };
+  console.log(userdata);
   return (
     <div className="max-w-[800px] mx-auto shadow-xl">
-     <div className={isAlertVisible?`fixed top-[20%] right-[40%] bg-green-300 p-2 border rounded-sm`:'hidden'}>
+      <p>
+        <span className="ring-1 p-1 rounded-lg  text-white bg-blue-700">
+          Add
+        </span>{" "}
+        to add on watchlist
+      </p>
+      <p className="py-2">
+        <span className="flex items-center">
+            <img src={userdata && userdata[0].image} alt="" width={30} className="mr-2"/>
+          {userdata && userdata[0].name}
+                                            <span className="ml-2">to get coin detail</span> 
+        </span>
       
-   <span className="font-semibold mr-3">{add}</span>
-   added to your watchlist
-     </div>
+      </p>
+
+      <div
+        className={
+          isAlertVisible
+            ? `fixed top-[20%] right-[40%] bg-green-300 p-2 border rounded-sm`
+            : "hidden"
+        }
+      >
+        <span className="font-semibold mr-3">{add}</span>
+        added to your watchlist
+      </div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -82,17 +104,19 @@ export default function Coindata() {
                     <TableRow
                       key={row.id}
                       onClick={() => {
-                        setcoinname(row.id);
+                        setcoinname(row);
                       }}
                     >
                       <TableCell>
-                        <div className="flex items-center cursor-pointer">
-                          <span className="mr-2">
-                            {" "}
-                            <img src={row.image} alt="" width={30} />
-                          </span>
-                          <span> {row.name}</span>
-                        </div>
+                        <Link to="/coin">
+                          <div className="flex items-center cursor-pointer">
+                            <span className="mr-2">
+                              {" "}
+                              <img src={row.image} alt="" width={30} />
+                            </span>
+                            <span> {row.name}</span>
+                          </div>
+                        </Link>
                       </TableCell>
                       <TableCell>{row.current_price}</TableCell>
                       <TableCell
@@ -123,8 +147,8 @@ export default function Coindata() {
                         <button
                           className="ring-1 p-1 rounded-lg ml-3 text-white bg-blue-700"
                           onClick={() => {
-                            coinadd(row)
-                            handleButtonClick (row.name)
+                            coinadd(row);
+                            handleButtonClick(row.name);
                           }}
                         >
                           Add

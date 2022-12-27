@@ -17,10 +17,10 @@ function App() {
         <Routes>
           <Route>
             <Route path="/" element={<Home />} />
-
-            <Route path="/coins/:id" element={<Coinpage />} />
+            <Route path="/coin" element={<Coinpage/>}/>
           </Route>
         </Routes>
+        
       </Context>
     </div>
   );

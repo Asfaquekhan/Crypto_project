@@ -29,6 +29,7 @@ export default function Watchlist() {
           return (
             <li key={curr.id}>
               <div className="flex items-center cursor-pointe justify-between border border-black" >
+                
                 <div className="flex items-center">
                 <span className="ml-3">
                   {" "}

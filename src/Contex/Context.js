@@ -7,7 +7,7 @@ const store =createContext();
 export  function Context({children}) {
     const [watchlist,setwatchlist]=useState(false)
     const [watchitem,setwatchitem]=useState([])
-    const [coinname,setcoinname]=useState()
+    const [coinname,setcoinname]=useState([])
     function coinadd(name){
         setwatchitem((value) => {
             if (value.includes(name)) {
